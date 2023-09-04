@@ -32,7 +32,7 @@ function Page() {
 
     const getTodo = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/cards?email=${session?.data?.user?.email}`, {
+            const res = await fetch(`http://todo-next-ritesh2004.vercel.app/api/cards?email=${session?.data?.user?.email}`, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
@@ -52,7 +52,7 @@ function Page() {
             if (con) {
                 // alert("Deleting")
                 // alert(id)
-                const res = await fetch(`http://localhost:3000/api/cards?id=${id}`, {
+                const res = await fetch(`http://todo-next-ritesh2004.vercel.app/api/cards?id=${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'

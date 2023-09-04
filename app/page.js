@@ -35,7 +35,7 @@ export default function Home() {
     try {
       if (session?.status === 'authenticated') {
         
-      const res = await fetch('http://localhost:3000/api/cards/',{
+      const res = await fetch('todo-next-ritesh2004.vercel.app/api/cards/',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'

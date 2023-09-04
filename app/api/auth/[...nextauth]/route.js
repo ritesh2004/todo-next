@@ -20,7 +20,7 @@ export const authOptions = {
           await connectDB();
           const userExist = await User.findOne({ email })
           if (!userExist) {
-            const res = await fetch('http://localhost:3000/api/users/', {
+            const res = await fetch('http://todo-next-ritesh2004.vercel.app/api/users/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
