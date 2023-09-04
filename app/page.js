@@ -7,7 +7,7 @@ import { useState } from 'react'
 export default function Home() {
   const router = useRouter()
   const [todo, setTodo] = useState({ title: "", desc: "" })
-  const [added, setAdded] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const session = useSession();
   // For storing data to local storage 
@@ -34,7 +34,7 @@ export default function Home() {
     e.preventDefault();
     try {
       if (session?.status === 'authenticated') {
-        
+        setLoading(true)
       const res = await fetch('https://todo-next-ritesh2004.vercel.app/api/cards/',{
         method:'POST',
         headers:{
@@ -42,7 +42,7 @@ export default function Home() {
         },
         body:JSON.stringify({heading:todo.title , desc:todo.desc, user:session?.data?.user?.email})
       })
-
+      setLoading(false)
       if (res.ok) {
         alert("Successfully added")
         router.push('/todos')
@@ -72,9 +72,9 @@ export default function Home() {
           <label for="desc" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ToDo Description</label>
           <textarea type="text" name='desc' id="desc" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={todo.desc} onChange={handleForm} required />
         </div>
-        {added ? <span className='text-green-500'>Added successfully</span> : <span></span>}
+        {/* {added ? <span className='text-green-500'>Added successfully</span> : <span></span>} */}
         <br />
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={addTodo}>Add ToDo</button>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style={loading?{backgroundColor:'gray',cursor:'not-allowed'}:{}} onClick={addTodo} disabled={loading}>Add ToDo</button>
       </form>
     </>
   )
