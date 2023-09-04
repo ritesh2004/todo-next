@@ -3,7 +3,8 @@ import mongoose,{Schema} from "mongoose";
 const cardSchema = new Schema(
     {
         heading:String,
-        desc:String
+        desc:String,
+        user:String
     },{
         timestamps:true
     }

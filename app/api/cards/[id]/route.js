@@ -12,9 +12,9 @@ export const PUT = async (request,{params}) =>{
     return NextResponse.json({'message':'updated'},{status:200})
 }
 
-export const GET = async (request,{params}) => {
-    const {id} = params;
-    await connectDB();
-    const data = await Test.findOne({_id:id})
-    return NextResponse.json({data},{status:200})
-}
+// export const GET = async (request,{params}) => {
+//     const {id} = params;
+//     await connectDB();
+//     const data = await Test.findOne({_id:id})
+//     return NextResponse.json({data},{status:200})
+// }

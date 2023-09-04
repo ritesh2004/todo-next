@@ -3,19 +3,22 @@ import Test from "@/models/Card";
 import { NextResponse } from "next/server"
 
 
-export const GET = async () =>{
+export const GET = async (req) =>{
+    // console.log(req)
+    const email = req.nextUrl.searchParams.get('email')
+    // console.log(email)
     await connectDB();
-    const cards = await Test.find();
+    const cards = await Test.find({user:email})
     // console.log(cards)
     return NextResponse.json({cards})
 }
 
 
 export const POST = async (req) =>{
-    const {heading,desc} = await req.json();
+    const {heading,desc,user} = await req.json();
     // console.log(heading)
     await connectDB();
-    await Test.create({heading,desc})
+    await Test.create({heading,desc,user})
     return NextResponse.json({message:'Created'},{status:201})
 }
 

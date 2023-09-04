@@ -1,28 +1,57 @@
 "use client"
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function Home() {
-
+  const router = useRouter()
   const [todo, setTodo] = useState({ title: "", desc: "" })
   const [added, setAdded] = useState(false)
 
-  const addTodo = (e) => {
-    e.preventDefault()
-    const todos = localStorage.getItem('todos')
-    if (todos) {
-      let todoJson = JSON.parse(todos)
-      if (todoJson.filter((array) => { return array.title === todo.title }).length > 0) {
-        alert("Title in this todo already present!")
-      } else {
-        todoJson.push(todo)
-        localStorage.setItem("todos", JSON.stringify(todoJson))
-        alert("ToDo added successfully!")
-        setTodo({ title: "", desc: "" })
-        // setAdded(false)
+  const session = useSession();
+  // For storing data to local storage 
+  // const addTodo = (e) => {
+  //   e.preventDefault()
+  //   const todos = localStorage.getItem('todos')
+  //   if (todos) {
+  //     let todoJson = JSON.parse(todos)
+  //     if (todoJson.filter((array) => { return array.title === todo.title }).length > 0) {
+  //       alert("Title in this todo already present!")
+  //     } else {
+  //       todoJson.push(todo)
+  //       localStorage.setItem("todos", JSON.stringify(todoJson))
+  //       alert("ToDo added successfully!")
+  //       setTodo({ title: "", desc: "" })
+  //       // setAdded(false)
+  //     }
+  //   } else {
+  //     localStorage.setItem("todos", JSON.stringify([todo]))
+  //   }
+  // }
+
+  const addTodo = async (e) =>{
+    e.preventDefault();
+    try {
+      if (session?.status === 'authenticated') {
+        
+      const res = await fetch('http://localhost:3000/api/cards/',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({heading:todo.title , desc:todo.desc, user:session?.data?.user?.email})
+      })
+
+      if (res.ok) {
+        alert("Successfully added")
+        router.push('/todos')
       }
-    } else {
-      localStorage.setItem("todos", JSON.stringify([todo]))
+    }else{
+      alert("Please sign in first")
+    }
+    } catch (error) {
+      alert(error)
     }
   }
 
