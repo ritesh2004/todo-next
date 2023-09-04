@@ -7,10 +7,11 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: "771537497508-31plh0t3a7rmos2nblmoq5uscnq0tga3.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
+  secret:'h+KyZ4I0l8OfdPxXR66UY92GwHftztpyfV/cq/opYxk=',
   callbacks: {
     async signIn({ user, account }) {
       const { name, email } = user;
