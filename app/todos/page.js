@@ -76,7 +76,7 @@ function page() {
         <>
             <div className='text-2xl font-bold text-center mb-1'>Your ToDos</div>
             <div className='text-xl text-center my-5 text-zinc-500'>Your ToDos Will be appear here</div>
-            <div className='flex flex-wrap -m-4 gap-5 mt-10'>
+            <div className='flex flex-wrap m-6 gap-5 mt-10 md:m-4 md:flex-row'>
                 {items?.map((item) => {
                     {/* console.log(item) */ }
                     return (

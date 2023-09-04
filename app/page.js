@@ -62,8 +62,8 @@ export default function Home() {
 
   return (
     <>
-      <form className='w-1/2 container mx-auto mt-20 rounded-lg shadow-2xl p-10'>
-        <div className='container mx-auto text-center my-5 text-2xl text-blue-500 font-bold md:w-full'>ToDo</div>
+      <form className='w-11/12 container mx-auto mt-20 rounded-lg shadow-2xl p-3 md:p-10 md:w-1/2'>
+        <div className='container mx-auto text-center my-5 text-2xl text-blue-500 font-bold sx:w-full'>ToDo</div>
         <div class="mb-6">
           <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ToDo Title</label>
           <input type="text" name='title' id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ToDo title" value={todo.title} onChange={handleForm} required />
