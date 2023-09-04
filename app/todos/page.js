@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-function page() {
+function Page() {
     // const items = [{title: "Python", desc: "rtytnyjmyjm "}, {title: "Java", desc: "rtytnyjmyjm "}]
     const [items, setItems] = useState([])
     const router = useRouter()
@@ -77,10 +77,10 @@ function page() {
             <div className='text-2xl font-bold text-center mb-1'>Your ToDos</div>
             <div className='text-xl text-center my-5 text-zinc-500'>Your ToDos Will be appear here</div>
             <div className='flex flex-wrap m-6 gap-5 mt-10 md:m-4 md:flex-row'>
-                {items?.map((item) => {
+                {items?.map((item,id) => {
                     {/* console.log(item) */ }
                     return (
-                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative">
+                        <a href="#" key={id} class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.heading}</h5>
                             <p class="font-normal text-gray-700 dark:text-gray-400">{item.desc}</p>
                             <br />
@@ -103,5 +103,5 @@ function page() {
     )
 }
 
-export default page
+export default Page
 

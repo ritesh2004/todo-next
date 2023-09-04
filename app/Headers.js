@@ -32,7 +32,7 @@ function Headers() {
               <Link href="/todos" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">YourToDos</Link>
             </li>
             {session?.status ==='authenticated' &&
-            <Image src={session?.data?.user?.image} width={40} height={40} style={{border:'solid 3px blue',borderRadius:'50%'}}/>
+            <Image src={session?.data?.user?.image} width={40} height={40} style={{border:'solid 3px blue',borderRadius:'50%'}} alt='userimage'/>
             }
             <li>
               {session?.status === 'authenticated' ?
