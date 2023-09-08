@@ -12,7 +12,7 @@ export const authOptions = {
       checks:['none']
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "3TIPe78MHrT51mpbrKXwnTOoD7SoWCpzbsG9EJtAJt8",
   callbacks: {
     async signIn({ user, account }) {
       console.log(user)
