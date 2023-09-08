@@ -9,21 +9,25 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      checks:['none']
     }),
   ],
-  secret:'h+KyZ4I0l8OfdPxXR66UY92GwHftztpyfV/cq/opYxk=',
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
+      console.log(user)
+      console.log(account)
       const { name, email } = user;
       if (account.provider === 'google') {
         try {
           await connectDB();
           const userExist = await User.findOne({ email })
           if (!userExist) {
-            const res = await fetch('http://todo-next-ritesh2004.vercel.app/api/users/', {
+            const res = await fetch('https://todo-next-ritesh2004.vercel.app/api/users', {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept' : 'application/json'
               },
               body: JSON.stringify({ name, email })
             })
@@ -34,7 +38,7 @@ export const authOptions = {
             }
           }
         } catch (error) {
-          alert(error)
+          console.log("Error",error)
         }
       }
       return user
